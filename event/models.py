@@ -1,5 +1,6 @@
-from django.db import models
 import uuid
+from django.db import models
+from students.models import Student
 
 class Event(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
@@ -21,3 +22,10 @@ class EventDetail(models.Model):
 
     def __str__(self):
         return f' The Detail of the event is{self.event.name}'
+    
+class Registration(models.Model):
+    event_detail = models.ForeignKey(EventDetail, on_delete=models.CASCADE, related_name='registrations')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.student} is registered for {self.event_detail.event.name}'

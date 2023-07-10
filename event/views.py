@@ -20,3 +20,16 @@ class EventDetailViewSet(ModelViewSet):
         return EventDetailSerializer
     
     
+class RegistrationViewSet(ModelViewSet):
+    def get_queryset(self):
+        return Registration.objects.filter(event_detail_id=self.kwargs['detail_pk'])
+    
+    def get_serializer_context(self):
+        return {'event_detail_id': self.kwargs['detail_pk']}
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return NewRegistrationSerializer
+        return RegistrationSerializer
+    
+    
