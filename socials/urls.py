@@ -6,6 +6,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('students/', include('students.urls')),
     path('event/', include('event.urls')),
+    path('chat/', include('chat.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 ]

@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'users',
     'event',
     'students',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +57,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ASGI_APPLICATION = 'socials.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
+
 
 ROOT_URLCONF = 'socials.urls'
 
@@ -85,7 +96,8 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST')
+        'HOST': config('DB_HOST'),
+        # 'PORT': config('DB_PORT'),
     }
 }
 
@@ -143,3 +155,5 @@ DJOSER = {
         'user_create': 'users.serializers.UserCreateSerializer'
     }
 }
+
+

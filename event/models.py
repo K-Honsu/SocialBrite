@@ -21,7 +21,7 @@ class EventDetail(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f' The Detail of the event is{self.event.name}'
+        return f'event -> {self.event.name}'
     
 class Registration(models.Model):
     event_detail = models.ForeignKey(EventDetail, on_delete=models.CASCADE, related_name='registrations')
