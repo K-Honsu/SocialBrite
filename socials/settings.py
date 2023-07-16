@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'users',
+    'event',
     'students',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ASGI_APPLICATION = 'socials.asgi.application'
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND':'channels.layers.InMemoryChannelLayer'
+#     }
+# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
 
 ROOT_URLCONF = 'socials.urls'
 
@@ -84,7 +104,8 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST')
+        'HOST': config('DB_HOST'),
+        # 'PORT': config('DB_PORT'),
     }
 }
 
