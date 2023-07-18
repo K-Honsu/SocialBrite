@@ -3,8 +3,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your models here.
-
-
 class Department(models.Model):
     name = models.CharField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
